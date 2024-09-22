@@ -1,13 +1,17 @@
 import { useState,useEffect } from "react";
 import  classes from './style.module.css';
+import TodoItem from "./assets/component/Todo-item";
+import './assets/styles/todo-item.css';
 
- 
 
 function App() {
   const [loading,setLoading] = useState(false);
   const [todos, setTodos] = useState([]);
   const [error,setError] =useState(null);
- async function fetchTodoList(){
+  const [details,setDetails]=useState([]);
+ 
+ 
+  async function fetchTodoList(){
    
   try{
   setLoading(true);
@@ -33,7 +37,6 @@ function App() {
     console.log(e);
     setError("some error occured");
   }
-    
 
  }
  
@@ -41,20 +44,44 @@ function App() {
    fetchTodoList();
   }
   ,[]);
+
+
+
+
+
+  async function fetchSingleTodo(getCurrentId) {
+    
+    console.log(getCurrentId);
+    try {
+
+    const response= await fetch();
+    const details=await response.json();
+     
+    if(details&&details.length>0){
+       setDetails(details);
+
+    }else{
+      setDetails([]);
+    }
+  
+  } catch (error) {
+      console.log(error)
+    }   
+  }
+
+
   return (
    <> 
     <div>
       <h1>TODO-APP</h1> 
-      <ul>
+       <div className="card-container">
          {todos.map((todos)=>{
-         return <li id={classes.headerTitle}  key={todos.id}>{todos.todo}</li>
+        return <TodoItem todos={todos} fetchSingleTodo={fetchSingleTodo}/>
          })
          }
-       </ul>
+        </div>
     </div>
-     
-       
-   
+
     </>
   )
 }

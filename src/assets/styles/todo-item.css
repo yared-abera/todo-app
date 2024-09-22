@@ -1,0 +1,23 @@
+.card-container{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    gap:10px;
+}
+
+.card{
+    width: 25%;
+    height:150px;
+    border: 2px solid black;
+}
+.button{
+   background: #000;
+   color: white;
+   text-align: center;
+   margin-left:30%;
+   
+}
+.button:hover{
+     transform: scale(1.1);
+    
+ } 
