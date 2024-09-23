@@ -2,6 +2,8 @@ import { useState,useEffect } from "react";
 import  classes from './style.module.css';
 import TodoItem from "./assets/component/Todo-item";
 import './assets/styles/todo-item.css';
+import TodoItemDetails from "./assets/component/TodoItemDetails";
+import ReactDOM from 'react-dom/client'; 
 
 
 function App() {
@@ -10,7 +12,21 @@ function App() {
   const [error,setError] =useState(null);
   const [details,setDetails]=useState([]);
  
- 
+  const renderTodoItemDetails = () => {
+    // Create a container for the component
+    const container = document.createElement('div');
+    document.body.appendChild(container);
+  
+    // Render the component using ReactDOM.createRoot (for React 18+)
+    const root = ReactDOM.createRoot(container);
+    root.render(<TodoItemDetails />);
+  };
+  
+  
+  
+  
+  
+  
   async function fetchTodoList(){
    
   try{
@@ -52,6 +68,9 @@ function App() {
   async function fetchSingleTodo(getCurrentId) {
     
     console.log(getCurrentId);
+    
+    
+
     try {
 
     const response= await fetch();
@@ -74,9 +93,13 @@ function App() {
    <> 
     <div>
       <h1>TODO-APP</h1> 
+      <p className="text-center mx-auto bg-black">hi there am tailwind</p>
        <div className="card-container">
          {todos.map((todos)=>{
-        return <TodoItem todos={todos} fetchSingleTodo={fetchSingleTodo}/>
+      return <TodoItem
+             todos={todos} 
+             fetchSingleTodo={fetchSingleTodo} 
+             renderTodoItemDetails={renderTodoItemDetails} />
          })
          }
         </div>

@@ -1,6 +1,6 @@
 import React from 'react'
 
-const TodoItem = ({todos,fetchSingleTodo}) => {
+const TodoItem = ({todos,fetchSingleTodo,renderTodoItemDetails}) => {
    
   
   
@@ -9,7 +9,7 @@ const TodoItem = ({todos,fetchSingleTodo}) => {
       <p>{todos.todo}</p>
      <button 
      className="button"
-     onClick={()=>fetchSingleTodo(todos.id)} 
+     onClick={()=>renderTodoItemDetails()} 
     
     >
         Details
